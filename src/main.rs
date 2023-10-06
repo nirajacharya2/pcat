@@ -78,10 +78,8 @@ fn highlite(source_code:&[u8]){
         match event.unwrap() {
             HighlightEvent::HighlightStart(s) => {
                 color=s.0;
-                eprintln!("highlight style started: {:?} {:?}", highlight_names[s.0],s);
             },
             HighlightEvent::Source {start, end} => {
-                eprintln!("source: {}-{}", start, end);
                 let mut text:String="".to_string();
                     if let Ok(subslice) = std::str::from_utf8(&source_code[start..end]) {
                         text= format!("{}{}",text, subslice.to_string());
@@ -90,7 +88,6 @@ fn highlite(source_code:&[u8]){
                 code_line=temp_ref;
             },
             HighlightEvent::HighlightEnd => {
-                eprintln!("highlight style ended");
             },
         }
     }
